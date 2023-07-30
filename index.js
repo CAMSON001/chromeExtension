@@ -1,7 +1,7 @@
 
 let inputBtn = document.getElementById("input-btn");
 let myLeads = []; 
-
+let body = document.getElementById("bodyEl")
 let ulEl = document.getElementById("ul-El")
 
 inputBtn.addEventListener("click", function(){
@@ -9,16 +9,26 @@ inputBtn.addEventListener("click", function(){
     if(val != ""){
         myLeads.push(val);
         console.log("the link is saved");
+        //mettre a jour le contenu
+        const li = document.createElement("li");
+        li.textContent = val;
+        ulEl.append(li);
+
     }
     else{    
-        alert("there is nothing");
+        const par = document.createElement("p");
+        par.textContent = "There is nothing...";
+        body.append(par)
+
     }
     console.log(myLeads.length);  
+
 })
 
-for(let i = 0; i< myLeads.length; i++){
-    ulEl.innerHTML += "<li> "+ myLeads[i] + "</li>"
-}
+
+
+
+
 
 
 
