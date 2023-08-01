@@ -10,11 +10,11 @@ inputBtn.addEventListener("click", function(){
     let val = document.getElementById("input-el").value;
     if(val != ""){
         myLeads.push(val);
-        console.log("the link is saved");
         //mettre a jour le contenu
-        let li = document.createElement("li");
-        li.textContent = val;
-        ulEl.append(li);
+        let items = `<li>
+                            <a target='_blank' href= '#'> ${val} </a>
+                     </li>`
+        ulEl.innerHTML += items ; 
         inputCase.value = "";
 
     }
