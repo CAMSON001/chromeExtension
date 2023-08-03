@@ -6,6 +6,12 @@ let ulEl = document.getElementById("ul-El")
 let inputCase = document.getElementById("input-el")
 let clearBtn = document.getElementById("clearBtn")
 
+
+localStorage.setItem("myWeb", "www.easy-resi.ci");
+let leads = localStorage.getItem("myLeads")
+console.log(leads);
+
+
 inputBtn.addEventListener("click", function(){
     let val = document.getElementById("input-el").value;
     if(val != ""){
