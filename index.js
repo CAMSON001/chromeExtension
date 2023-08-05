@@ -5,7 +5,7 @@ let body = document.getElementById("bodyEl");
 let ulEl = document.getElementById("ul-El");
 let inputCase = document.getElementById("input-el");
 let clearBtn = document.getElementById("clearBtn");
-let allLeads = document.getElementById("leadsBtn");
+let btnLeads = document.getElementById("leadsBtn");
 
 
 
@@ -40,15 +40,22 @@ clearBtn.addEventListener("click", function(){
         ulEl.removeChild(ulEl.firstChild);
         myLeads.pop(ulEl.firstChild)
       }
-    
+
+
 })
 
-allLeads.addEventListener("click", function(){
-    let leads = JSON.parse(localStorage.getItem("myLeads"));
-    for(let i = 0 ; i< leads.lenght; i++){ 
-        ulEl.innerHTML += `<li> <a target='_blank' href= '#'> ${leads[i]} </a> </li>` ; 
+
+
+btnLeads.addEventListener("click", function(){
+    let leads = localStorage.getItem("myLeads");
+    leads = JSON.parse(leads)
+    for(let i= 0 ; i<leads.length; i++){
         console.log(leads[i]);
+        let elmt= `<li><a  href= '#'> ${leads[i]} </a></li>`
+        ulEl.innerHTML +=  elmt ; 
     }
+    
+   
 })
 
 
