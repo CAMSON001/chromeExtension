@@ -1,28 +1,27 @@
 
 let inputBtn = document.getElementById("input-btn");
 let myLeads = []; 
-let body = document.getElementById("bodyEl")
-let ulEl = document.getElementById("ul-El")
-let inputCase = document.getElementById("input-el")
-let clearBtn = document.getElementById("clearBtn")
+let body = document.getElementById("bodyEl");
+let ulEl = document.getElementById("ul-El");
+let inputCase = document.getElementById("input-el");
+let clearBtn = document.getElementById("clearBtn");
+let allLeads = document.getElementById("leadsBtn");
 
 
-localStorage.setItem("myWeb", "www.easy-resi.ci");
-let leads = localStorage.getItem("myLeads")
-console.log(leads);
+
 
 
 inputBtn.addEventListener("click", function(){
+
     let val = document.getElementById("input-el").value;
     if(val != ""){
-        myLeads.push(val);
-        //mettre a jour le contenu
         let items = `<li>
                             <a target='_blank' href= '#'> ${val} </a>
                      </li>`
         ulEl.innerHTML += items ; 
         inputCase.value = "";
-
+        myLeads.push(val);
+        localStorage.setItem("myLeads", JSON.stringify(myLeads));
     }
     else{    
         const par = document.createElement("p");
@@ -30,9 +29,10 @@ inputBtn.addEventListener("click", function(){
         body.append(par)
 
     }
-    console.log(myLeads.length);  
+    
 
 })
+
 
 
 clearBtn.addEventListener("click", function(){
@@ -42,6 +42,16 @@ clearBtn.addEventListener("click", function(){
       }
     
 })
+
+allLeads.addEventListener("click", function(){
+    let leads = JSON.parse(localStorage.getItem("myLeads"));
+    for(let i = 0 ; i< leads.lenght; i++){ 
+        ulEl.innerHTML += `<li> <a target='_blank' href= '#'> ${leads[i]} </a> </li>` ; 
+        console.log(leads[i]);
+    }
+})
+
+
 
 
 
