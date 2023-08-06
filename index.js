@@ -35,11 +35,12 @@ inputBtn.addEventListener("click", function(){
 
 
 
-clearBtn.addEventListener("click", function(){
+clearBtn.addEventListener("dblclick", function(){
     while (ulEl.firstChild) {
         ulEl.removeChild(ulEl.firstChild);
         myLeads.pop(ulEl.firstChild)
       }
+    localStorage.clear()
 
 
 })
@@ -48,12 +49,21 @@ clearBtn.addEventListener("click", function(){
 
 btnLeads.addEventListener("click", function(){
     let leads = localStorage.getItem("myLeads");
-    leads = JSON.parse(leads)
-    for(let i= 0 ; i<leads.length; i++){
-        console.log(leads[i]);
-        let elmt= `<li><a  href= '#'> ${leads[i]} </a></li>`
-        ulEl.innerHTML +=  elmt ; 
+    leads = JSON.parse(leads);
+    if(leads){
+        
+        for(let i= 0 ; i<leads.length; i++){
+            console.log(leads[i]);
+            let elmt= `<li><a  href= '#'> ${leads[i]} </a></li>`
+            ulEl.innerHTML +=  elmt ; 
+        }
     }
+    else{
+        const paragraphe = document.createElement("p");
+        paragraphe.textContent = "There is no leads..";
+        body.append(paragraphe)
+    }
+   
     
    
 })
