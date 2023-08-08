@@ -1,14 +1,35 @@
 
 let inputBtn = document.getElementById("input-btn");
 let myLeads = []; 
+let tabLeads = [];
 let body = document.getElementById("bodyEl");
 let ulEl = document.getElementById("ul-El");
 let inputCase = document.getElementById("input-el");
 let clearBtn = document.getElementById("clearBtn");
 let btnLeads = document.getElementById("leadsBtn");
+let tabBtn = document.getElementById("tabBtn");
 
 
 
+
+tabBtn.addEventListener("click", function() {
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        let activeTab = tabs[0];
+        tabLeads.push(activeTab.url);
+        localStorage.setItem("tabLeads", JSON.stringify(tabLeads));
+
+        let leadsCpys = localStorage.getItem("tabLeads");
+        leadsCpys = JSON.parse(leadsCpys);
+
+        // Effacer le contenu de la liste avant de la remplir à nouveau
+        ulEl.innerHTML = '';
+
+        for (let i = 0; i < leadsCpys.length; i++) {
+            let elmts = `<li><a href='#'>${leadsCpys[i]}</a></li>`;
+            ulEl.innerHTML += elmts;
+        }
+    });
+});
 
 
 inputBtn.addEventListener("click", function(){
