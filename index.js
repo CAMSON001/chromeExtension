@@ -14,21 +14,12 @@ let tabBtn = document.getElementById("tabBtn");
 
 tabBtn.addEventListener("click", function() {
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        let activeTab = tabs[0];
-        tabLeads.push(activeTab.url);
-        localStorage.setItem("tabLeads", JSON.stringify(tabLeads));
+        console.log(tabs);
 
-        let leadsCpys = localStorage.getItem("tabLeads");
-        leadsCpys = JSON.parse(leadsCpys);
-
-        // Effacer le contenu de la liste avant de la remplir à nouveau
-        ulEl.innerHTML = '';
-
-        for (let i = 0; i < leadsCpys.length; i++) {
-            let elmts = `<li><a href='#'>${leadsCpys[i]}</a></li>`;
-            ulEl.innerHTML += elmts;
-        }
     });
+    myLeads.push(tabs[O].url);
+    localStorage.setItem("myLeads", JSON.stringify(myLeads));
+    renderLeads(myLeads);
 });
 
 
@@ -56,7 +47,7 @@ inputBtn.addEventListener("click", function(){
 
 
 
-clearBtn.addEventListener("dbldblclick", function(){
+clearBtn.addEventListener("dblclick", function(){
     while (ulEl.firstChild) {
         ulEl.removeChild(ulEl.firstChild);
         myLeads.pop(ulEl.firstChild)
@@ -76,7 +67,7 @@ btnLeads.addEventListener("click", function(){
         
         for(let i= 0 ; i<leads.length; i++){
             console.log(leads[i]);
-            let elmt= `<li><a  href= '#'> ${leads[i]} </a></li>`
+            let elmt= `<li><a target href= '${leads[i]}'> ${leads[i]} </a></li>`
             ulEl.innerHTML +=  elmt ; 
         }
     }
@@ -90,8 +81,15 @@ btnLeads.addEventListener("click", function(){
    
 })
 
-
-
+function renderLeads(LEADS){
+    let mylists = ""; 
+    for(let i= 0 ; i<LEADS.length; i++){
+        console.log(LEADS[i]);
+        mylists += `<li><a  href= '${leads[i]}'> ${LEADS[i]} </a></li>`
+        
+    }
+    ulEl.innerHTML =  mylists ; 
+}
 
 
 
