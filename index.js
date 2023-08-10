@@ -8,18 +8,40 @@ let inputCase = document.getElementById("input-el");
 let clearBtn = document.getElementById("clearBtn");
 let btnLeads = document.getElementById("leadsBtn");
 let tabBtn = document.getElementById("tabBtn");
+const leadsfromlocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 
 
 
 
-tabBtn.addEventListener("click", function() {
+if(leadsfromlocalStorage){
+    myLeads = leadsfromlocalStorage ;
+    render(myLeads);
+}
+
+
+
+function render(leadss){
+    let elmt = ""
+   
+        
+    for(let i= 0 ; i<leadss.length; i++){
+        elmt += `<li><a target href= '${leadss[i]}'> ${leadss[i]} </a></li>`
+            
+    }
+    ulEl.innerHTML =  elmt ; 
+}
+
+
+
+
+
+tabBtn.addEventListener("click", function(){
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        console.log(tabs);
-
-    });
-    myLeads.push(tabs[O].url);
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    renderLeads(myLeads);
+        myLeads.push(tabs[0].url);
+        localStorage.setItem("myLeads", JSON.stringify(myLeads));
+        render(myLeads);
+        
+    });    
 });
 
 
@@ -34,12 +56,6 @@ inputBtn.addEventListener("click", function(){
         inputCase.value = "";
         myLeads.push(val);
         localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    }
-    else{    
-        const par = document.createElement("p");
-        par.textContent = "There is nothing...";
-        body.append(par)
-
     }
     
 
@@ -58,38 +74,6 @@ clearBtn.addEventListener("dblclick", function(){
 })
 
 
-
-
-btnLeads.addEventListener("click", function(){
-    let leads = localStorage.getItem("myLeads");
-    leads = JSON.parse(leads);
-    if(leads){
-        
-        for(let i= 0 ; i<leads.length; i++){
-            console.log(leads[i]);
-            let elmt= `<li><a target href= '${leads[i]}'> ${leads[i]} </a></li>`
-            ulEl.innerHTML +=  elmt ; 
-        }
-    }
-    else{
-        const paragraphe = document.createElement("p");
-        paragraphe.textContent = "There is no leads..";
-        body.append(paragraphe)
-    }
-   
-    
-   
-})
-
-function renderLeads(LEADS){
-    let mylists = ""; 
-    for(let i= 0 ; i<LEADS.length; i++){
-        console.log(LEADS[i]);
-        mylists += `<li><a  href= '${leads[i]}'> ${LEADS[i]} </a></li>`
-        
-    }
-    ulEl.innerHTML =  mylists ; 
-}
 
 
 

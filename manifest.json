@@ -5,5 +5,8 @@
     "action":{
         "default_popup": "index.html",
         "default_icon": "reshot-icon-home-GN6D7UFVMH.svg"
-    }
+    },
+    "permissions": [
+        "tabs" 
+    ]
 }
